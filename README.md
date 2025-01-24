@@ -36,11 +36,11 @@ VITE_RAPID_API_HOST=yahoo-weather5.p.rapidapi.com
 
 ## Estructura del Proyecto
 
-src/
-├── modules/ # Módulos de la aplicación
-│ ├── Home/ # Módulo de inicio
-│ ├── Details/ # Módulo de detalles
-│ └── Favorites/ # Módulo de favoritos
-├── shared/ # Componentes y utilidades compartidas
-├── context/ # Contextos de React
-└── types/ # Tipos de TypeScript
+📁 src/
+├── 🏠 modules/          # Módulos principales de la aplicación
+│   ├── 🏡 Home/        # Página de inicio y búsqueda
+│   ├── 📊 Details/     # Vista detallada del clima
+│   └── ⭐ Favorites/   # Gestión de ciudades favoritas
+├── 🔄 shared/          # Componentes y utilidades reutilizables 
+├── 🌍 context/         # Gestión del estado global con React Context
+└── 📝 types/           # Definiciones de tipos TypeScript
