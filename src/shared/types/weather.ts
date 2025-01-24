@@ -70,6 +70,8 @@ export interface WeatherContextType {
   setLoading: (loading: boolean) => void;
   error: string | null;
   setError: (error: string | null) => void;
+  recentSearches: WeatherData['location'][];
+  addRecentSearch: (location: WeatherData['location']) => void;
 }
 
 export type DetailsProps = {

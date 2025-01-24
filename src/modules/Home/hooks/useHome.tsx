@@ -17,21 +17,27 @@ export const useHome = () => {
       favorites,
       addFavorite,
       removeFavorite,
+      addRecentSearch,
     } = useWeather();
   
-    const handleSearch = async (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!searchQuery.trim()) return;
+    const handleSearch = async (e: React.FormEvent | string) => {
+      if (typeof e !== 'string') {
+        e.preventDefault();
+      }
+  
+      const query = typeof e === 'string' ? e : searchQuery;
+      if (!query.trim()) return;
   
       setLoading(true);
       setError(null);
   
       try {
-        const data = await searchCity(searchQuery);
+        const data = await searchCity(query);
         setWeatherData(data);
+        addRecentSearch(data.location);
       } catch (err) {
         console.error(err);
-        setError(`Hubo un error al obtener los datos del clima para la ciudad ${searchQuery.toLocaleUpperCase()}. Intente nuevamente más tarde.`);
+        setError(`Hubo un error al obtener los datos del clima para la ciudad ${query.toLocaleUpperCase()}. Intente nuevamente más tarde.`);
       } finally {
         setLoading(false);
       }

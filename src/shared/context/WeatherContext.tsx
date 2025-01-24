@@ -10,13 +10,15 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(() => {
-    const lastSearch = localStorage.getItem('lastSearch');
-    return lastSearch ? JSON.parse(lastSearch) : null;
-  });
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [recentSearches, setRecentSearches] = useState<WeatherData['location'][]>(() => {
+    const saved = localStorage.getItem('recentSearches');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   // Persistir favoritos
   useEffect(() => {
@@ -30,6 +32,11 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, [weatherData]);
 
+  // Persistir búsquedas recientes
+  useEffect(() => {
+    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+  }, [recentSearches]);
+
   const addFavorite = (city: FavoriteCity) => {
     if (!favorites.some(fav => fav.name === city.name)) {
       setFavorites([...favorites, city]);
@@ -38,6 +45,13 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const removeFavorite = (cityName: string) => {
     setFavorites(favorites.filter(city => city.name !== cityName));
+  };
+
+  const addRecentSearch = (location: WeatherData['location']) => {
+    setRecentSearches(prev => {
+      const filtered = prev.filter(item => item.city !== location.city);
+      return [location, ...filtered].slice(0, 5); // Mantener solo las últimas 5 búsquedas
+    });
   };
 
   return (
@@ -52,6 +66,8 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
         setLoading,
         error,
         setError,
+        recentSearches,
+        addRecentSearch,
       }}
     >
       {children}

@@ -20,14 +20,14 @@ export const Details = ({
             startIcon={<ArrowLeft />}
             onClick={() => navigate(-1)}
           >
-            Back
+            Volver
           </Button>
           <Button
             onClick={handleFavoriteToggle}
             startIcon={isFavorite ? <HeartOff /> : <Heart />}
             color={isFavorite ? 'secondary' : 'primary'}
           >
-            {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+            {isFavorite ? 'Eliminar de favoritos' : 'Agregar a favoritos'}
           </Button>
         </Box>
   

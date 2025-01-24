@@ -20,8 +20,7 @@ export const useDetails = () => {
         setError(null);
   
         try {
-          // Primero intentamos obtener datos del localStorage
-          const cachedData = localStorage.getItem(`weatherData-${city}`);
+          const cachedData = localStorage.getItem(`weatherData-${city.toLowerCase()}`);
           if (cachedData) {
             setWeatherData(JSON.parse(cachedData));
             setLoading(false);

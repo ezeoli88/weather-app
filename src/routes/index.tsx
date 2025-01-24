@@ -2,7 +2,7 @@ import { ThemeProvider } from "@mui/material/styles"
 import { AuthProvider } from "../shared/context/AuthContext"
 import { WeatherProvider } from "../shared/context/WeatherContext"
 import { ProtectedRoute } from "./ProtectedRoute"
-import { Details } from "../modules/Details/components/Details"
+import DetailsPage from "../modules/Details/components/index"
 import FavoritesPage from "../modules/Favorites/components"
 import Home from "../modules/Home/components"
 import { Login } from "../modules/Login/components/Login"
@@ -40,7 +40,7 @@ export const RoutesApp = () => {
                 <Route path="/details/:city" element={
                   <ProtectedRoute>
                     <Layout>
-                      <Details />
+                      <DetailsPage />
                     </Layout>
                   </ProtectedRoute>
                 } />

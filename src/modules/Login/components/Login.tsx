@@ -73,7 +73,7 @@ export const Login = () => {
               fullWidth
               type="submit"
               variant="contained"
-              disabled={loading}
+              disabled={loading || !email || !password}
               startIcon={loading ? <CircularProgress size={20} /> : null}
               sx={{ mt: 3 }}
             >
