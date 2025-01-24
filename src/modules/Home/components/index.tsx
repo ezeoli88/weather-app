@@ -25,7 +25,7 @@ const HomePage = () => {
   const { recentSearches } = useWeather();
 
   const handleChipSearch = (city: string) => {
-    handleSearch(city);
+    handleSearch(city.toLowerCase());
   };
 
   return (
