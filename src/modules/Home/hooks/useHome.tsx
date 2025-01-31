@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWeather } from '../../../shared/context/WeatherContext';
 import { searchCity } from '../services/api';
@@ -44,6 +44,13 @@ export const useHome = () => {
         }
     };
 
+    const handleSetSearchQuery = useCallback((city: string) => {
+        setSearchQuery(city.toLowerCase());
+    }, []);
+
+    const handleChipSearch = (city: string) => {
+        handleSearch(city.toLowerCase());
+    };
     const isFavorite = weatherData
         ? favorites.some((city) => city.name === weatherData.location.city)
         : false;
@@ -65,7 +72,7 @@ export const useHome = () => {
 
     return {
         searchQuery,
-        setSearchQuery,
+        handleSetSearchQuery,
         navigate,
         weatherData,
         loading,
@@ -73,5 +80,6 @@ export const useHome = () => {
         isFavorite,
         handleFavoriteToggle,
         handleSearch,
+        handleChipSearch,
     };
 };

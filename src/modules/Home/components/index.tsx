@@ -17,7 +17,7 @@ const SearchForm = styled('form')(({ theme }) => ({
 const HomePage = () => {
     const {
         searchQuery,
-        setSearchQuery,
+        handleSetSearchQuery,
         navigate,
         weatherData,
         loading,
@@ -25,17 +25,18 @@ const HomePage = () => {
         isFavorite,
         handleFavoriteToggle,
         handleSearch,
+        handleChipSearch,
     } = useHome();
     const { recentSearches } = useWeather();
-
-    const handleChipSearch = (city: string) => {
-        handleSearch(city.toLowerCase());
-    };
 
     return (
         <Box sx={{ maxWidth: 600, mx: 'auto' }}>
             <SearchForm onSubmit={handleSearch}>
-                <SearchInput value={searchQuery} onChange={setSearchQuery} disabled={loading} />
+                <SearchInput
+                    value={searchQuery}
+                    onChange={handleSetSearchQuery}
+                    disabled={loading}
+                />
                 <Button
                     type="submit"
                     variant="contained"
@@ -48,7 +49,7 @@ const HomePage = () => {
             {recentSearches.length > 0 && (
                 <Chips
                     recentSearches={recentSearches}
-                    setSearchQuery={setSearchQuery}
+                    setSearchQuery={handleSetSearchQuery}
                     onSearch={handleChipSearch}
                     currentCity={weatherData?.location.city}
                 />
